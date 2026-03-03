@@ -13,13 +13,13 @@ export default function Hero() {
         </FadeIn>
 
         <FadeIn delay={100}>
-          <p className="ml-6 mt-4 font-mono text-base sm:text-lg text-muted">
+          <p className="mt-4 font-mono text-base sm:text-lg text-muted">
             researcher. engineer. leader.
           </p>
         </FadeIn>
 
         <FadeIn delay={200}>
-          <p className="ml-6 mt-6 text-base leading-relaxed text-muted max-w-lg">
+          <p className="mt-6 text-base leading-relaxed text-muted max-w-lg">
             Full-stack developer, AI/ML engineer, and researcher based in Maine.
           </p>
           <p className="ml-6 text-base leading-relaxed text-muted max-w-lg">
@@ -28,7 +28,7 @@ export default function Hero() {
         </FadeIn>
 
         <FadeIn delay={300}>
-          <div className="ml-6 mt-8 flex gap-5 font-mono text-sm">
+          <div className="mt-8 flex gap-5 font-mono text-sm">
             <a
               href="https://github.com/CDurepos"
               target="_blank"
@@ -56,24 +56,6 @@ export default function Hero() {
           </div>
         </FadeIn>
       </div>
-
-      <FadeIn delay={600}>
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
-          <svg
-            className="w-5 h-5 text-muted/50 animate-bounce"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1.5}
-              d="M19 14l-7 7m0 0l-7-7"
-            />
-          </svg>
-        </div>
-      </FadeIn>
     </section>
   );
 }
