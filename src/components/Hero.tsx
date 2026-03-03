@@ -13,22 +13,22 @@ export default function Hero() {
         </FadeIn>
 
         <FadeIn delay={100}>
-          <p className="mt-4 font-mono text-base sm:text-lg text-muted">
+          <p className="ml-2 mt-4 font-mono text-base sm:text-lg text-muted">
             researcher. engineer. leader.
           </p>
         </FadeIn>
 
         <FadeIn delay={200}>
-          <p className="mt-6 text-base leading-relaxed text-muted max-w-lg">
+          <p className="ml-2 mt-6 text-base leading-relaxed text-muted max-w-lg">
             Full-stack developer, AI/ML engineer, and researcher based in Maine.
           </p>
-          <p className="ml-6 text-base leading-relaxed text-muted max-w-lg">
+          <p className="ml-2 text-base leading-relaxed text-muted max-w-lg">
             In pursuit of greatness.
           </p>
         </FadeIn>
 
         <FadeIn delay={300}>
-          <div className="mt-8 flex gap-5 font-mono text-sm">
+          <div className="ml-2 mt-8 flex gap-5 font-mono text-sm">
             <a
               href="https://github.com/CDurepos"
               target="_blank"
