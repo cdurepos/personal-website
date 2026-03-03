@@ -12,7 +12,7 @@ const roles = [
   },
   {
     title: "Lead Researcher & Full-Stack Developer",
-    company: "USM Artificial Intelligence I & Information Retrieval Laboratory",
+    company: "USM Artificial Intelligence & Information Retrieval Laboratory",
     location: "Portland, ME",
     period: "Feb 2025 — Present",
     points: [
