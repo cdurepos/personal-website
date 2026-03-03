@@ -5,7 +5,7 @@ export default function Hero() {
     <section className="relative min-h-screen flex flex-col justify-center px-6 max-w-4xl mx-auto">
       <div>
         <FadeIn>
-          <h1 className="text-5xl sm:text-6xl font-medium tracking-tight leading-[1.1]">
+          <h1 className="text-[9vw] sm:text-6xl font-medium tracking-tight leading-[1.1] whitespace-nowrap">
             <span className="font-mono text-muted/70">&#123;</span>
             <span>Clayton <span className="text-accent">Durepos</span></span>
             <span className="font-mono text-muted/70">&#125;</span>
