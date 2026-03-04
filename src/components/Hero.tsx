@@ -17,13 +17,13 @@ export default function Hero() {
             researcher. engineer. leader.
           </p>
         </FadeIn>
-
+ 
         <FadeIn delay={200}>
           <p className="ml-2 mt-6 text-base leading-relaxed text-muted max-w-lg">
             Full-stack developer, AI/ML engineer, and researcher based in Maine.
           </p>
           <p className="ml-2 text-base leading-relaxed text-muted max-w-lg">
-            In pursuit of greatness.
+            In pursuit of the beyond.
           </p>
         </FadeIn>
 

@@ -12,32 +12,31 @@ export default function About() {
       <div className="mt-8 space-y-5 text-base leading-relaxed">
         <FadeIn delay={100}>
           <p>
-          I’m Clayton, a Computer Science undergrad and researcher at the University of Southern Maine.
+            I’m Clayton, a Computer Science undergrad and researcher at the University of Southern Maine.
           </p>
         </FadeIn>
 
         <FadeIn delay={200}>
           <p className="text-muted">
-            I'm open to building whatever my path puts in front of me, 
-            even if it's something I've never touched before.
-            I’m not trying to brand myself into one lane. 
-            I'm drawn to the work that raises the bar. Problems that force me to learn fast, 
-            build clean, and deliver something real.
+            I’m open to building whatever comes my way. 
+            Even if that means getting my hands dirty with something I’ve never even heard of.
+            I’m not trying to keep myself confined to one domain; I’m versatile.
+            I’m drawn to work that challenges me. 
+            Problems that ask me to learn faster, think harder.
           </p>
         </FadeIn>
 
         <FadeIn delay={300}>
           <p className="text-muted">
-            What matters most to me is momentum. Getting better, taking on harder challenges, and learning more. 
-            I like work where there’s room to explore, but also standards to uphold. 
-            Make it work, make it clean, make it solid.
+            Momentum, that’s what matters to me most. 
+            Taking on harder challenges, learning more, expanding my skillset and experience.
+            I like room where there’s room to grow & explore, but also an image to uphold, standards to follow.
           </p>
         </FadeIn>
 
         <FadeIn delay={300}>
           <p className="text-muted">
-          If you’re building something ambitious and you want someone who adapts quickly and executes, 
-          I’m down to talk.
+            If you’re building something ambitious and you’re looking for someone who adapts quickly and moves with confidence, I’m more than happy to connect.
           </p>
         </FadeIn>
       </div>
