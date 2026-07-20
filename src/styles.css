@@ -1,17 +1,27 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #faf9f7;
-  --color-foreground: #1c1917;
-  --color-muted: #78716c;
-  --color-accent: #c4703a;
-  --color-accent-hover: #b5612e;
-  --color-accent-dim: #f0e0d0;
-  --color-border: #e7e5e4;
-  --font-sans:
-    "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono:
-    "IBM Plex Mono", "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* violet core with blue + red edges */
+  --color-background: #f4f2f9;
+  --color-foreground: #18141f;
+  --color-muted: #6b6480;
+  --color-accent: #7c3aed;
+  --color-accent-hover: #6d28d9;
+  --color-accent-dim: #e9e2fb;
+  --color-border: #e2dcee;
+  --font-sans: "Outfit", "Avenir Next", "Segoe UI", sans-serif;
+  --font-display: "Syne", "Outfit", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Motion system — one language everywhere */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 html {
@@ -23,15 +33,42 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+  overflow-x: hidden;
 }
 
+/* Balanced line breaks on headings, tidy rag on body copy */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Atmospheric wash — blue + red resolving into violet */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 60% at 85% -10%, rgba(59, 111, 208, 0.14), transparent 55%),
+    radial-gradient(ellipse 55% 45% at 50% 110%, rgba(124, 58, 237, 0.12), transparent 55%),
+    linear-gradient(180deg, #f8f6fd 0%, var(--color-background) 40%, #efeaf7 100%);
+}
+
+/* Film grain */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.03;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -44,17 +81,686 @@ section {
   scroll-margin-top: 5rem;
 }
 
+/* Accessible, on-brand focus — a perfectionist's detail */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--color-muted) 30%, transparent);
+  border-radius: 6px;
+  border: 3px solid var(--color-background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklab, var(--color-accent) 45%, transparent);
+}
+
+/* ── Scroll reveal ─────────────────────────────────────────── */
 .fade-in {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transform: translateY(22px);
+  filter: blur(6px);
+  transition:
+    opacity 0.85s var(--ease-out),
+    transform 0.85s var(--ease-out),
+    filter 0.85s var(--ease-out);
+  will-change: opacity, transform, filter;
 }
 
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+  filter: blur(0);
 }
 
+/* ── Scroll progress ───────────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 60;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(to right, #3b6fd0, #7c3aed, #d1366b);
+}
+
+/* ── Topographic hero signature ────────────────────────────── */
+.topo-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.topo-fade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--color-background) 0%, transparent 45%),
+    linear-gradient(0deg, var(--color-background) 2%, transparent 22%),
+    linear-gradient(180deg, color-mix(in oklab, var(--color-background) 85%, transparent) 0%, transparent 18%);
+}
+
+.scroll-cue {
+  animation: cue-bob 2.6s var(--ease-in-out) infinite;
+}
+
+@keyframes cue-bob {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, 5px);
+    opacity: 1;
+  }
+}
+
+/* ── Section rhythm & headers ──────────────────────────────── */
+.section-block {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+/* Tighten the Experience → Projects boundary specifically */
+#work {
+  padding-bottom: 3rem;
+}
+
+#projects {
+  padding-top: 3.5rem;
+}
+
+.section-aside {
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .section-aside {
+    position: sticky;
+    top: 6.5rem;
+    align-self: start;
+  }
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--color-accent);
+}
+
+.section-label .name {
+  text-transform: lowercase;
+}
+
+.section-label .rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    color-mix(in oklab, var(--color-accent) 40%, transparent),
+    transparent
+  );
+}
+
+@media (min-width: 1024px) {
+  .section-label-rail,
+  .section-label-rail-right {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .section-label-rail {
+    align-items: flex-start;
+  }
+
+  .section-label-rail-right {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .section-label-rail .name,
+  .section-label-rail-right .name {
+    font-size: 0.95rem;
+    color: var(--color-foreground);
+  }
+
+  .section-label-rail .rule,
+  .section-label-rail-right .rule {
+    width: 32px;
+    flex: none;
+  }
+
+  .section-label-rail-right .rule {
+    background: linear-gradient(
+      to left,
+      color-mix(in oklab, var(--color-accent) 40%, transparent),
+      transparent
+    );
+  }
+}
+
+/* ── Section kicker ────────────────────────────────────────── */
+.section-kicker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 2.75rem;
+}
+
+/* ── Project tiles ─────────────────────────────────────────── */
+.project-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-border);
+  border-radius: 0.7rem;
+  overflow: hidden;
+  background: color-mix(in oklab, var(--color-background) 55%, transparent);
+  transition:
+    transform 0.4s var(--ease-out),
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.project-tile:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--color-accent) 45%, transparent);
+  box-shadow: 0 16px 48px -20px rgba(30, 20, 48, 0.24);
+}
+
+.tile-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.project-thumb {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 30% 25%, color-mix(in oklab, #3b6fd0 20%, transparent), transparent 55%),
+    radial-gradient(circle at 75% 80%, color-mix(in oklab, var(--color-accent) 22%, transparent), transparent 55%),
+    color-mix(in oklab, var(--color-accent) 6%, var(--color-background));
+  border-bottom: 1px solid var(--color-border);
+}
+
+.project-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.project-tile:hover .project-thumb img {
+  transform: scale(1.04);
+}
+
+.project-thumb-mark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: color-mix(in oklab, var(--color-accent) 70%, var(--color-foreground));
+  opacity: 0.55;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.project-thumb-overlay {
+  position: absolute;
+  bottom: 0.6rem;
+  right: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #fff;
+  background: var(--color-accent);
+  padding: 0.16rem 0.5rem;
+  border-radius: 0.3rem;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.project-tile:hover .project-thumb-overlay {
+  opacity: 1;
+  transform: none;
+}
+
+.project-tile-body {
+  padding: 1.1rem 1.2rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.project-tile-title {
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.project-tile-desc {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-muted);
+}
+
+.project-tile-foot {
+  margin-top: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.project-tile-code {
+  position: relative;
+  z-index: 2;
+}
+
+.project-tile:hover .tech-tag {
+  background: color-mix(in oklab, var(--color-accent-dim) 85%, transparent);
+  color: color-mix(in oklab, var(--color-accent) 85%, var(--color-foreground));
+}
+
+@media (min-width: 640px) {
+  .project-tile-featured {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+  }
+
+  .project-tile-featured .project-thumb {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 240px;
+    border-bottom: none;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .project-tile-featured .project-tile-body {
+    justify-content: center;
+    padding: 1.6rem;
+  }
+}
+
+/* ── Publications (reference list) ─────────────────────────── */
+.pub-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.pub-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.6rem 0;
+  border-top: 1px solid color-mix(in oklab, var(--color-border) 75%, transparent);
+  transition: transform 0.3s var(--ease-out);
+}
+
+.pub-list > :first-child .pub-row {
+  padding-top: 0;
+  border-top: none;
+}
+
+.pub-row:hover {
+  transform: translateX(4px);
+}
+
+.pub-title {
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.pub-authors {
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-muted);
+}
+
+.pub-venue {
+  margin-top: 0.2rem;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--color-muted);
+}
+
+.pub-me {
+  color: var(--color-foreground);
+  font-weight: 500;
+}
+
+.pub-title {
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+
+.pub-authors {
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-muted);
+}
+
+.pub-venue {
+  margin-top: 0.2rem;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--color-muted);
+}
+
+/* ── About graphic ─────────────────────────────────────────── */
+.domain-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (min-width: 1024px) {
+  .domain-wrap {
+    overflow: visible;
+  }
+}
+
+/* Hidden on small screens (no side space); lives in the left margin on desktop */
+.domain {
+  display: none;
+  /* violet resolved from blue + red */
+  --vp: #7c3aed;
+  --vp-blue: #3b6fd0;
+  --vp-red: #d1366b;
+  color: var(--vp);
+}
+
+@media (min-width: 1024px) {
+  .domain {
+    position: absolute;
+    top: 50%;
+    left: -22%;
+    transform: translateY(-50%);
+    width: min(40vw, 540px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    color: var(--vp);
+    /* Vivid in the margin, dissolves before it reaches the text */
+    -webkit-mask-image: linear-gradient(to right, #000 40%, transparent 74%);
+    mask-image: linear-gradient(to right, #000 40%, transparent 74%);
+  }
+}
+
+.domain-void,
+.domain-ring,
+.domain-infinity {
+  grid-area: 1 / 1;
+  place-self: center;
+}
+
+/* Orb — blue on one side, red on the other, violet at the core */
+.domain-void {
+  width: 96%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 42% 38%, rgba(255, 255, 255, 0.12), transparent 38%),
+    radial-gradient(
+      circle at 34% 52%,
+      color-mix(in oklab, var(--vp-blue) 50%, transparent),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      color-mix(in oklab, var(--vp) 46%, transparent) 0%,
+      color-mix(in oklab, var(--vp) 22%, transparent) 44%,
+      transparent 66%
+    );
+  box-shadow: inset 0 0 60px color-mix(in oklab, var(--vp) 28%, transparent);
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.domain-ring {
+  width: 106%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid color-mix(in oklab, var(--vp) 34%, transparent);
+  opacity: 0;
+  transform: scale(0.1);
+}
+
+.domain-infinity {
+  width: 82%;
+  height: auto;
+  opacity: 0;
+  overflow: visible;
+}
+
+.domain-infinity .inf-stroke {
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.domain-infinity .inf-glow {
+  stroke: color-mix(in oklab, var(--vp) 72%, var(--vp-blue));
+  stroke-width: 6;
+  fill: none;
+  opacity: 0;
+  filter: blur(6px);
+}
+
+.domain-infinity .inf-spark {
+  fill: color-mix(in oklab, var(--vp) 55%, #ffffff);
+  filter: drop-shadow(0 0 5px color-mix(in oklab, var(--vp) 80%, var(--vp-red)));
+}
+
+.domain-infinity .inf-spark-dim {
+  fill: color-mix(in oklab, var(--vp-blue) 65%, #ffffff);
+  opacity: 0.7;
+}
+
+/* Entrance */
+.domain.is-open .domain-void {
+  animation: orb-in 2.2s var(--ease-out) forwards;
+}
+
+.domain.is-open .domain-ring {
+  animation: ring-expand 2.6s var(--ease-out) forwards;
+}
+
+.domain.is-open .domain-ring:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.domain.is-open .domain-ring:nth-child(4) {
+  animation-delay: 0.32s;
+}
+
+.domain.is-open .domain-infinity {
+  animation: mark-fade 1.6s ease 0.3s forwards;
+}
+
+.domain.is-open .domain-infinity .inf-stroke {
+  animation: inf-draw 2.4s var(--ease-out) 0.3s forwards;
+}
+
+.domain.is-open .domain-infinity .inf-glow {
+  animation: inf-glow-pulse 4s ease-in-out 2s infinite;
+}
+
+@keyframes inf-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes inf-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes ring-expand {
+  0% {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+  35% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0.12;
+    transform: scale(1);
+  }
+}
+
+@keyframes orb-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+}
+
+@keyframes mark-fade {
+  to {
+    opacity: 0.22;
+  }
+}
+
+/* The accent word that triggers the graphic */
+.domain-word {
+  color: #7c3aed;
+  font-style: normal;
+  text-decoration: underline dotted color-mix(in oklab, #7c3aed 45%, transparent);
+  text-underline-offset: 3px;
+  cursor: default;
+  transition: color 0.2s ease;
+}
+
+.domain-word:hover {
+  color: #6d28d9;
+}
+
+/* ── Nav ───────────────────────────────────────────────────── */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.nav-link:hover::after,
+.nav-link[data-active="true"]::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-link[data-active="true"] {
+  color: var(--color-foreground);
+}
+
+/* ── Inline text links ─────────────────────────────────────── */
+.text-link {
+  position: relative;
+  color: var(--color-accent);
+  transition: color 0.2s ease;
+}
+
+.text-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.text-link:hover {
+  color: var(--color-accent-hover);
+}
+
+.text-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ── Link chips ────────────────────────────────────────────── */
 .link-chip {
   display: inline-flex;
   align-items: center;
@@ -69,23 +775,128 @@ section {
   letter-spacing: 0.01em;
   color: var(--color-muted);
   transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease;
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s var(--ease-out);
 }
 
 .link-chip:hover {
-  background: color-mix(in oklab, var(--color-accent) 6%, transparent);
-  border-color: color-mix(in oklab, var(--color-accent) 35%, transparent);
+  background: color-mix(in oklab, var(--color-accent) 8%, transparent);
+  border-color: color-mix(in oklab, var(--color-accent) 40%, transparent);
   color: var(--color-accent);
+  transform: translateY(-1px);
 }
 
 .link-chip-accent {
   color: var(--color-accent);
-  border-color: color-mix(in oklab, var(--color-accent) 25%, transparent);
+  border-color: color-mix(in oklab, var(--color-accent) 28%, transparent);
 }
 
 .link-chip-accent:hover {
   color: var(--color-accent-hover);
-  border-color: color-mix(in oklab, var(--color-accent) 42%, transparent);
+  border-color: color-mix(in oklab, var(--color-accent) 50%, transparent);
+}
+
+/* ── Tech tags ─────────────────────────────────────────────── */
+.tech-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  background: color-mix(in oklab, var(--color-accent-dim) 55%, transparent);
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.3rem;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+/* ── Timeline (experience) ─────────────────────────────────── */
+/* Aligns the timeline spine with the About-section orb's *visible* center.
+   The orb (.domain) sits in the same max-w-4xl container at left:-22% with
+   width min(40vw,540px). Its right side is masked/faded, so the visible core
+   reads at ~40% across (not the 50% geometric center) — we target that point:
+   left(-19.712rem @56rem container) + 0.40*width - 1.5rem content padding.
+   Margin (not padding) so the spine can sit left of the text edge.
+   Desktop only — orb hidden <1024px. */
+.work-rail {
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .work-rail {
+    margin-left: calc(min(16vw, 13.5rem) - 13.82rem);
+  }
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::after {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 0.55rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-background);
+  border: 1.5px solid color-mix(in oklab, var(--color-accent) 55%, transparent);
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s var(--ease-out);
+}
+
+.timeline-item:hover::after {
+  background: var(--color-accent);
+  transform: scale(1.25);
+}
+
+/* ── Reduced motion ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .fade-in {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+
+  .project-tile:hover {
+    transform: none;
+  }
+
+  .project-tile:hover .project-thumb img {
+    transform: none;
+  }
+
+  .domain.is-open .domain-void,
+  .domain.is-open .domain-ring,
+  .domain.is-open .domain-infinity,
+  .domain.is-open .domain-infinity .inf-stroke,
+  .domain.is-open .domain-infinity .inf-glow {
+    animation: none;
+  }
+
+  .domain.is-open .domain-void {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  .domain.is-open .domain-ring {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+
+  .domain.is-open .domain-infinity {
+    opacity: 0.22;
+  }
+
+  .domain.is-open .domain-infinity .inf-stroke {
+    stroke-dashoffset: 0;
+  }
 }

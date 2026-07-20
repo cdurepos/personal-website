@@ -1,4 +1,5 @@
 import FadeIn from "./FadeIn";
+import Section from "./Section";
 
 const links = [
   {
@@ -13,33 +14,30 @@ const links = [
     label: "linkedin.com/in/cdurepos",
     href: "https://linkedin.com/in/cdurepos",
   },
+  {
+    label: "scholar.google.com",
+    href: "https://scholar.google.com/citations?user=tApykZYAAAAJ&hl=en",
+  },
 ];
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 px-6 max-w-4xl mx-auto">
+    <Section id="contact" label="contact">
       <FadeIn>
-        <span className="font-mono text-sm text-accent tracking-wide">
-          {"// contact"}
-        </span>
-      </FadeIn>
-
-      <FadeIn delay={100}>
-        <p className="mt-8 text-base leading-relaxed max-w-md">
-          Always open to interesting conversations, collaborations, or just
-          saying hey.
+        <p className="text-xl sm:text-2xl font-display tracking-tight leading-snug max-w-md">
+          Always open to connecting, or just chatting.
         </p>
       </FadeIn>
 
-      <FadeIn delay={200}>
-        <div className="mt-8 space-y-3">
+      <FadeIn delay={150}>
+        <div className="mt-8 flex flex-col items-start gap-3">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
               target={link.href.startsWith("mailto") ? undefined : "_blank"}
               rel="noopener noreferrer"
-              className="block font-mono text-sm text-muted hover:text-accent transition-colors"
+              className="text-link font-mono text-sm"
             >
               {link.label}
             </a>
@@ -47,13 +45,12 @@ export default function Contact() {
         </div>
       </FadeIn>
 
-      <FadeIn delay={300}>
-        <div className="mt-24 pt-8 border-t border-border">
-          <p className="font-mono text-xs text-muted/60">
-            &copy; {new Date().getFullYear()} Clayton Durepos
-          </p>
+      <FadeIn delay={250}>
+        <div className="mt-24 pt-8 border-t border-border flex items-center justify-between font-mono text-xs text-muted/60">
+          <span>&copy; {new Date().getFullYear()} Clayton Durepos</span>
+          <span>Portland, ME</span>
         </div>
       </FadeIn>
-    </section>
+    </Section>
   );
 }

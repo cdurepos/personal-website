@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useRef, ReactNode } from "react";
 
 export default function FadeIn({
@@ -17,6 +15,11 @@ export default function FadeIn({
     const el = ref.current;
     if (!el) return;
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.classList.add("visible");
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -24,7 +27,7 @@ export default function FadeIn({
           observer.unobserve(el);
         }
       },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -48px 0px" }
     );
 
     observer.observe(el);

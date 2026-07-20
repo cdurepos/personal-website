@@ -1,45 +1,44 @@
+import { useState } from "react";
 import FadeIn from "./FadeIn";
+import Section from "./Section";
+import AboutGraphic from "./AboutGraphic";
 
 export default function About() {
-  return (
-    <section id="about" className="py-24 px-6 max-w-4xl mx-auto">
-      <FadeIn>
-        <span className="font-mono text-sm text-accent tracking-wide">
-          {"// about"}
-        </span>
-      </FadeIn>
+  const [replay, setReplay] = useState(0);
 
-      <div className="mt-8 space-y-5 text-base leading-relaxed">
+  return (
+    <Section
+      id="about"
+      backdrop={
+        <div className="domain-wrap" aria-hidden="true">
+          <AboutGraphic key={replay} />
+        </div>
+      }
+    >
+      <div className="space-y-7 text-base leading-relaxed">
         <FadeIn delay={100}>
-          <p>
-            I’m Clayton, a Computer Science undergrad and researcher at the University of Southern Maine.
+          <p className="text-xl sm:text-2xl font-display tracking-tight leading-snug text-foreground">
+            I&rsquo;m Clayton, a Computer Science undergrad and researcher at the
+            University of Southern Maine.
           </p>
         </FadeIn>
 
         <FadeIn delay={200}>
           <p className="text-muted">
-            I’m open to building whatever comes my way. 
-            Even if that means getting my hands dirty with something I’ve never even heard of.
-            I’m not trying to keep myself confined to one domain; I’m versatile.
-            I’m drawn to work that challenges me. 
-            Problems that ask me to learn faster, think harder.
+            I&rsquo;m always open to anything comes my way. Sometimes it's difficult, 
+            especially when presented with something new. That said, I&rsquo;m not looking to 
+            keep myself confined to one domain, as I build my career. I&rsquo;m versatile.
+            I enjoy work that challenges me. Things that ask me to learn faster, think harder.
           </p>
         </FadeIn>
 
-        <FadeIn delay={300}>
+        <FadeIn delay={400}>
           <p className="text-muted">
-            Momentum, that’s what matters to me most. 
-            Taking on harder challenges, learning more, expanding my skillset and experience.
-            I like room where there’s room to grow & explore, but also an image to uphold, standards to follow.
-          </p>
-        </FadeIn>
-
-        <FadeIn delay={300}>
-          <p className="text-muted">
-            If you’re building something ambitious and you’re looking for someone who adapts quickly and moves with confidence, I’m more than happy to connect.
+            If you&rsquo;re looking for someone who adapts quickly and moves with confidence,
+            I&rsquo;m always happy to connect.
           </p>
         </FadeIn>
       </div>
-    </section>
+    </Section>
   );
 }

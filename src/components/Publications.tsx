@@ -1,51 +1,77 @@
+import { Fragment } from "react";
 import FadeIn from "./FadeIn";
+import Section from "./Section";
 
-const papers = [
+type Paper = {
+  title: string;
+  authors: string;
+  venue: string;
+  year: string;
+  doiLookup?: string;
+};
+
+const papers: Paper[] = [
   {
-    title:
-      "Multimodal Emotion Classification in Artwork: A Comparative Study Across Modalities",
-    authors: "Durepos, C., et al.",
-    venue: "Proceedings of the ACM/IEEE Joint Conference on Digital Libraries",
-    year: "2025",
-    doiLookup:
-      "https://doi.org/10.1109/JCDL67857.2025.00055",
+    title: "MathMex-PDF: Towards Accessible Visual Mathematics",
+    authors: "Serrano, N., Matheson, L., Durepos, C., Mansouri, B.",
+    venue: "Proceedings of the 49th International ACM SIGIR Conference",
+    year: "2026",
   },
   {
     title: "MathMex-V2: A Large Language Model Enabled Math Search Engine",
     authors: "Durepos, C., et al.",
     venue: "Proceedings of the ACM/IEEE Joint Conference on Digital Libraries",
     year: "2025",
-    doiLookup:
-      "https://doi.org/10.1109/JCDL67857.2025.00063",
+    doiLookup: "https://doi.org/10.1109/JCDL67857.2025.00063",
+  },
+  {
+    title:
+      "Multimodal Emotion Classification in Artwork: A Comparative Study Across Modalities",
+    authors: "Durepos, C., Pitcairn, A., Mansouri, B.",
+    venue: "Proceedings of the ACM/IEEE Joint Conference on Digital Libraries",
+    year: "2025",
+    doiLookup: "https://doi.org/10.1109/JCDL67857.2025.00055",
   },
   {
     title:
       "From Speech to LaTeX: Large Language Models for Mathematical Accessibility in Digital Libraries",
-    authors: "Pitcairn, A., Durepos, C., Mansouri, B.",
+    authors: "Pitcairn, A., Durepos, C., Largey, N., Mansouri, B.",
     venue: "Proceedings of the ACM/IEEE Joint Conference on Digital Libraries",
     year: "2025",
-    doiLookup:
-      "https://doi.org/10.1109/JCDL67857.2025.00058",
+    doiLookup: "https://doi.org/10.1109/JCDL67857.2025.00058",
   },
 ];
 
+const ME = "Durepos, C.";
+
+function highlightAuthors(authors: string) {
+  return authors.split(ME).map((part, i, arr) => (
+    <Fragment key={i}>
+      {part}
+      {i < arr.length - 1 && <span className="pub-me">{ME}</span>}
+    </Fragment>
+  ));
+}
+
 export default function Publications() {
   return (
-    <section id="publications" className="py-24 px-6 max-w-4xl mx-auto">
+    <Section id="publications" variant="plain">
       <FadeIn>
-        <span className="font-mono text-sm text-accent tracking-wide">
-          {"// publications"}
-        </span>
+        <span className="section-kicker">publications</span>
       </FadeIn>
 
-      <div className="mt-10 space-y-8">
+      <div className="pub-list">
         {papers.map((paper, i) => (
-          <FadeIn key={paper.title} delay={100 + i * 100}>
-            <div>
-              <div className="flex items-start justify-between gap-4">
-                <h3 className="text-base font-medium leading-snug">
-                  {paper.title}
-                </h3>
+          <FadeIn key={paper.title} delay={80 + i * 80}>
+            <article className="pub-row">
+              <div className="min-w-0">
+                <h3 className="pub-title">{paper.title}</h3>
+                <p className="pub-authors">{highlightAuthors(paper.authors)}</p>
+                <p className="pub-venue">
+                  {paper.venue}, {paper.year}
+                </p>
+              </div>
+              {paper.doiLookup && (
                 <a
                   href={paper.doiLookup}
                   target="_blank"
@@ -54,17 +80,11 @@ export default function Publications() {
                 >
                   doi
                 </a>
-              </div>
-              <p className="mt-2 font-mono text-xs text-muted">
-                {paper.authors}
-              </p>
-              <p className="mt-1 text-sm text-muted italic">
-                {paper.venue}, {paper.year}
-              </p>
-            </div>
+              )}
+            </article>
           </FadeIn>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }
