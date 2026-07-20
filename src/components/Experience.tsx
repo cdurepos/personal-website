@@ -13,6 +13,7 @@ const roles: Role[] = [
   {
     title: "Software Engineering Intern",
     company: "VividCloud",
+    location: "Brunswick, ME",
     period: "Incoming · 2026",
     points: [],
   },
@@ -68,7 +69,7 @@ type Education = {
 
 const education: Education[] = [
   {
-    degree: "Japanese Language & Culture",
+    degree: "Japanese Language, Exchange",
     school: "Kanda University of International Studies",
     location: "Chiba, Japan",
     period: "Mar 2026 — Jul 2026",

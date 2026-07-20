@@ -22,10 +22,10 @@ const links = [
 
 export default function Contact() {
   return (
-    <Section id="contact" label="contact">
+    <Section id="contact">
       <FadeIn>
         <p className="text-xl sm:text-2xl font-display tracking-tight leading-snug max-w-md">
-          Always open to connecting, or just chatting.
+          Always open to connecting,<br></br>or just chatting.
         </p>
       </FadeIn>
 

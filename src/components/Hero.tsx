@@ -24,7 +24,7 @@ export default function Hero() {
 
         <FadeIn delay={180}>
           <p className="mt-8 text-lg sm:text-xl leading-relaxed text-muted max-w-lg">
-            Building whatever comes my way, to perfection.
+            Figuring it out, one build at a time.
           </p>
         </FadeIn>
 

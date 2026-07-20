@@ -3,10 +3,10 @@
 @theme inline {
   /* violet core with blue + red edges */
   --color-background: #f4f2f9;
-  --color-foreground: #18141f;
+  --color-foreground: #2a2531;
   --color-muted: #6b6480;
-  --color-accent: #7c3aed;
-  --color-accent-hover: #6d28d9;
+  --color-accent: #8a67d0;
+  --color-accent-hover: #7350bd;
   --color-accent-dim: #e9e2fb;
   --color-border: #e2dcee;
   --font-sans: "Outfit", "Avenir Next", "Segoe UI", sans-serif;
