@@ -191,12 +191,22 @@ section {
   padding-bottom: 7rem;
 }
 
-/* Tighten the Experience → Projects boundary specifically */
+/* Tighten stacked section boundaries so padding doesn't double up */
 #work {
   padding-bottom: 3rem;
 }
 
 #projects {
+  padding-top: 3.5rem;
+  padding-bottom: 3rem;
+}
+
+#publications {
+  padding-top: 3.5rem;
+  padding-bottom: 3rem;
+}
+
+#contact {
   padding-top: 3.5rem;
 }
 
