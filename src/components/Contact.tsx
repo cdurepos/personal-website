@@ -25,7 +25,7 @@ export default function Contact() {
     <Section id="contact" variant="plain">
       <FadeIn>
         <p className="text-xl sm:text-2xl font-display tracking-tight leading-snug max-w-md">
-          Always open to connecting,<br></br>or just chatting.
+          Always open to connecting...<br></br>or just chatting.
         </p>
       </FadeIn>
 

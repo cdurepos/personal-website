@@ -16,13 +16,7 @@ const papers: Paper[] = [
     authors: "Serrano, N., Matheson, L., Durepos, C., Mansouri, B.",
     venue: "Proceedings of the 49th International ACM SIGIR Conference",
     year: "2026",
-  },
-  {
-    title: "MathMex-V2: A Large Language Model Enabled Math Search Engine",
-    authors: "Durepos, C., et al.",
-    venue: "Proceedings of the ACM/IEEE Joint Conference on Digital Libraries",
-    year: "2025",
-    doiLookup: "https://doi.org/10.1109/JCDL67857.2025.00063",
+    doiLookup: "https://doi.org/10.1145/3805712.3808386"
   },
   {
     title:
@@ -31,6 +25,13 @@ const papers: Paper[] = [
     venue: "Proceedings of the ACM/IEEE Joint Conference on Digital Libraries",
     year: "2025",
     doiLookup: "https://doi.org/10.1109/JCDL67857.2025.00055",
+  },
+  {
+    title: "MathMex-V2: A Large Language Model Enabled Math Search Engine",
+    authors: "Durepos, C., et al.",
+    venue: "Proceedings of the ACM/IEEE Joint Conference on Digital Libraries",
+    year: "2025",
+    doiLookup: "https://doi.org/10.1109/JCDL67857.2025.00063",
   },
   {
     title:

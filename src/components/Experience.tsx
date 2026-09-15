@@ -11,50 +11,43 @@ type Role = {
 
 const roles: Role[] = [
   {
-    title: "Software Engineering Intern",
+    title: "Software Engineer Intern",
     company: "VividCloud",
     location: "Brunswick, ME",
-    period: "Incoming · 2026",
+    period: "Sep 2026 — May 2027",
     points: [],
   },
   {
-    title: "AI/ML Engineering Intern",
+    title: "AI/ML Engineer Intern",
     company: "Deca Defense",
     location: "Melbourne, FL",
     period: "Jan 2026 — Jun 2026",
     points: [
-      "Built autonomy tooling for simulated drone systems — from instant dataset generation with analytics to automated training and evaluation loops.",
-      "Developed an LLM tool translating natural-language commands into structured MAVSDK API calls, and scaled it to multi-agent swarm formations.",
+      "Built an LLM tool translating natural-language instructions into MAVSDK JSON flight commands, with a reusable command repository and deterministic vector math.",
+      "Optimized LLM inference with custom token-prediction syntax; extended autonomous drone capabilities to support multi-agent swarms.",
     ],
   },
   {
-    title: "Software Development Intern",
-    company: "ScanPower",
-    location: "Falmouth, ME",
-    period: "Sep 2025 — Mar 2026",
-    points: [
-      "Designed and shipped a customer-facing application, iterating directly with beta customers.",
-      "Integrated RESTful APIs and internal services using Node.js and React for Amazon FBA operations.",
-    ],
-  },
-  {
-    title: "Lead Researcher & Full-Stack Developer",
+    title: "Lead Researcher · Full-Stack Developer · AI/ML Researcher",
     company: "USM Artificial Intelligence & Information Retrieval Laboratory",
     location: "Portland, ME",
-    period: "Feb 2025 — Mar 2026",
+    period: "Feb 2025 — Apr 2026",
     points: [
-      "Coordinated research projects and mentored junior researchers, overseeing direction and publication timelines.",
-      "Built MathMex — an NSF-funded semantic math search engine with a React/TypeScript UI and an OpenSearch vector backend with selective RAG.",
-      "Researched multimodal sentiment analysis in fine art, building transformer-based fusion models over ViT and BERT embeddings.",
+      "Coordinated MathMex-PDF research and development, leading the NSF-supported multimodal retrieval project to ACM SIGIR 2026 publication.",
+      "Mentored junior researchers and maintained shared Linux servers, APIs, GitHub repositories, and research applications.",
+      "Built a Dockerized RAG document-search platform with automated ingestion, vector indexing, retrieval, and multi-engine administration.",
+      "Served as primary MathMex developer across React, TypeScript, transformer embeddings, and OpenSearch vector search, published at JCDL 2025.",
+      "Deployed MathMex on Linux; designed API and domain architecture and configured DNS, Nginx reverse proxies, port routing, and systemd.",
+      "Engineered multimodal fusion models for fine-art emotion classification, published at JCDL 2025.",
     ],
   },
   {
-    title: "Subject-Based Tutor",
-    company: "University of Southern Maine",
-    location: "Portland, ME",
-    period: "Sep 2024 — Mar 2026",
+    title: "Software Developer Intern",
+    company: "ScanPower",
+    location: "Falmouth, ME",
+    period: "Sep 2025 — Jan 2026",
     points: [
-      "Tutored undergraduates in introductory physics, mathematics, and computer science.",
+      "Designed and deployed a customer-facing application, integrating Node.js and React RESTful APIs to streamline Amazon FBA operations based on direct beta user feedback.",
     ],
   },
 ];
@@ -65,6 +58,7 @@ type Education = {
   location: string;
   period: string;
   distinctions?: string[];
+  roles?: string;
 };
 
 const education: Education[] = [
@@ -73,13 +67,21 @@ const education: Education[] = [
     school: "Kanda University of International Studies",
     location: "Chiba, Japan",
     period: "Mar 2026 — Jul 2026",
+    roles: "English Language Practice Partner",
   },
   {
-    degree: "Computer Science, B.S.",
+    degree: "Computer Science & Philosophy, B.S.",
     school: "University of Southern Maine",
     location: "Portland, ME",
-    period: "Aug 2023 — May 2027",
-    distinctions: ["Mitchell Scholar", "Reynolds-Kerr Pioneer Scholar"],
+    period: "Sep 2023 — May 2027",
+    distinctions: [
+      "George J. Mitchell Scholar",
+      "UROP Fellow",
+      "Dara J. Kaufman Scholar",
+      "CS Undergraduate Research Award",
+    ],
+    roles:
+      "Former President, Computer Science Society · Subject-Based Tutor · Technology Coach",
   },
 ];
 
@@ -153,6 +155,9 @@ export default function Experience() {
                       </span>
                     ))}
                   </div>
+                )}
+                {edu.roles && (
+                  <p className="mt-3 font-mono text-xs text-muted">{edu.roles}</p>
                 )}
               </div>
             ))}

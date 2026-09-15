@@ -35,9 +35,9 @@ export default function Nav() {
       <div className="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
         <a
           href="#"
-          className="font-display text-lg font-semibold tracking-tight text-foreground hover:text-accent transition-colors"
+          className="font-display text-xl font-semibold tracking-tight text-foreground hover:text-accent transition-colors"
         >
-          cd
+          魁
         </a>
         <div className="flex gap-5 sm:gap-6">
           {links.map((link) => (
