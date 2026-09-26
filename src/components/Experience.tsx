@@ -14,7 +14,7 @@ const roles: Role[] = [
     title: "Software Engineer Intern",
     company: "VividCloud",
     location: "Brunswick, ME",
-    period: "Sep 2026 — May 2027",
+    period: "Sep 2026 — Present",
     points: [],
   },
   {
@@ -23,22 +23,22 @@ const roles: Role[] = [
     location: "Melbourne, FL",
     period: "Jan 2026 — Jun 2026",
     points: [
-      "Built an LLM tool translating natural-language instructions into MAVSDK JSON flight commands, with a reusable command repository and deterministic vector math.",
-      "Optimized LLM inference with custom token-prediction syntax; extended autonomous drone capabilities to support multi-agent swarms.",
+      "Built an LLM pipeline and synthetic-data generator translating natural-language instructions into MAVSDK JSON flight commands.",
+      "Improved command accuracy by ~12% by replacing unreliable LLM vector math with deterministic vector decomposition.",
+      "Designed custom token-prediction syntax to reduce input token count; extended autonomous generation to support multi-agent swarm behavior.",
     ],
   },
   {
-    title: "Lead Researcher · Full-Stack Developer · AI/ML Researcher",
+    title: "Lead Researcher",
     company: "USM Artificial Intelligence & Information Retrieval Laboratory",
     location: "Portland, ME",
     period: "Feb 2025 — Apr 2026",
     points: [
-      "Coordinated MathMex-PDF research and development, leading the NSF-supported multimodal retrieval project to ACM SIGIR 2026 publication.",
-      "Mentored junior researchers and maintained shared Linux servers, APIs, GitHub repositories, and research applications.",
-      "Built a Dockerized RAG document-search platform with automated ingestion, vector indexing, retrieval, and multi-engine administration.",
-      "Served as primary MathMex developer across React, TypeScript, transformer embeddings, and OpenSearch vector search, published at JCDL 2025.",
-      "Deployed MathMex on Linux; designed API and domain architecture and configured DNS, Nginx reverse proxies, port routing, and systemd.",
-      "Engineered multimodal fusion models for fine-art emotion classification, published at JCDL 2025.",
+      "Coordinated development of the NSF-supported MathMex-PDF retrieval system, published as a demo at ACM SIGIR 2026.",
+      "Engineered a Dockerized semantic search product with drag-and-drop document indexing, administrator console, and RAG-powered chatbot.",
+      "Built and managed lab infrastructure, including application deployments, DNS, Nginx routing, and a centralized API.",
+      "Served as primary developer for NSF-supported MathMex across TypeScript/React, Python, and OpenSearch; published at ACM/IEEE JCDL 2025.",
+      "Designed a ViT/BERT multimodal fusion model, improving macro F1 by 8.9% over the best unimodal baseline; published at ACM/IEEE JCDL 2025.",
     ],
   },
   {
@@ -47,7 +47,8 @@ const roles: Role[] = [
     location: "Falmouth, ME",
     period: "Sep 2025 — Jan 2026",
     points: [
-      "Designed and deployed a customer-facing application, integrating Node.js and React RESTful APIs to streamline Amazon FBA operations based on direct beta user feedback.",
+      "Designed and deployed a customer-facing React/Node.js application with REST APIs to streamline Amazon FBA operations.",
+      "Communicated directly with beta users to gather product feedback and iterate on the hosted application.",
     ],
   },
 ];
@@ -63,7 +64,7 @@ type Education = {
 
 const education: Education[] = [
   {
-    degree: "Japanese Language, Exchange",
+    degree: "Japanese Language & Culture, Exchange",
     school: "Kanda University of International Studies",
     location: "Chiba, Japan",
     period: "Mar 2026 — Jul 2026",
@@ -78,7 +79,7 @@ const education: Education[] = [
       "George J. Mitchell Scholar",
       "UROP Fellow",
       "Dara J. Kaufman Scholar",
-      "CS Undergraduate Research Award",
+      "CS Undergraduate Research Award Recipient",
     ],
     roles:
       "Former President, Computer Science Society · Subject-Based Tutor · Technology Coach",
